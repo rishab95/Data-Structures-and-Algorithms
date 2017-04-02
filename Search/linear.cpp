@@ -7,11 +7,8 @@ void linearSearch(int ar[], int n, int e)
 	for(int i=0;i<n;i++)
 	{
 		if(ar[i] == e)
-			cout<<e;
-		 
-
+			cout<<e; 
 	}
-
 }
 
 int main()
