@@ -32,5 +32,5 @@ int main(){
     pop();
     push(9);
     push(4);
-    cout<<top<<"\n";    
+    cout<<top()<<"\n";    
 }
