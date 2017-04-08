@@ -1,35 +1,61 @@
+//a bug in the program
+
 #include <iostream>
 #include <algorithm>
 #include <stack>
 #include <vector>
 
 using namespace std;
-bool visited[100];
+//bool visited[100];
 
-void dfs_util(vector <int> mygraph[], int u){
-	visited[u-1] = true;
-	cout<<u<<" ";
-	for(int i=0;i<mygraph[u-1].size();i++){
+
+
+void graph_color(vector <int> mygraph[], int v){
+
+	int final_color[v];
+
+	final_color[0] = 0;
+	for(int i=1;i<v;i++)
+		final_color[i] = -1; // set unassigned
+
+	bool avail_color[v];
+	for(int i=0;i<v;i++)
+		avail_color[i] = false;
+
+
+	/*for(int i=0;i<mygraph[u-1].size();i++){
 		if(visited[mygraph[u-1][i]-1] == false){
 			dfs_util(mygraph, mygraph[u-1][i]);
 		}
-	}
-}
+	}*/
 
-void dfs(vector <int> mygraph[], int v){
-	for(int i=0;i<v;i++){
-		if(visited[i] == false){
-			dfs_util(mygraph, i+1);
-		}
+	for(int u=1;u<v;u++){
+		
+		for(int i=0;i<mygraph[u-1].size();i++)
+			if(final_color[mygraph[u-1][i]-1] != -1)
+				avail_color[final_color[mygraph[u-1][i]-1]] = true;
+		
+		int cr;
+		for(cr=0;cr<v;cr++)
+			if(avail_color[cr] == false)
+				break;
+
+		final_color[u] = cr; // Assign the color found in prev statement
+
+		for(int i=0;i<mygraph[u-1].size();i++)
+			if(final_color[mygraph[u-1][i]-1] != -1)
+				avail_color[final_color[mygraph[u-1][i]-1]] = false; // Reset for next iteration
+		
 	}
+	for(int u=0;u<v;u++)
+		cout<<"Vertex: "<<u<<"->"<<"Color: "<<final_color[u]<<endl;
 }
 
 int main(){
 	int v,e;
 	cin>>v>>e;
 	vector <int> graph[v];
-	for(int i=0;i<v;i++)
-		visited[i] = false;
+	
 	cout<<"Enter Edges: \n";
 	int a, b;
 	for(int i=0;i<e;i++){		
@@ -44,6 +70,6 @@ int main(){
 		cout<<endl;		
 	}
 	cout<<"DFS:-\n";
-	dfs(graph,v);
+	graph_color(graph,v);
 	return 0;
 }
