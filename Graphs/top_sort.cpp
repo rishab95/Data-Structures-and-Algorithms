@@ -8,11 +8,11 @@ bool visited[100];
 stack <int> mstack;
 
 void topsort_util(vector <int> mygraph[], int u){
-	visited[u-1] = true;
+	visited[u] = true;
 	//cout<<u<<" ";
-	for(int i=0;i<mygraph[u-1].size();i++){
-		if(visited[mygraph[u-1][i]-1] == false){
-			topsort_util(mygraph, mygraph[u-1][i]);
+	for(int i=0;i<mygraph[u].size();i++){
+		if(visited[mygraph[u][i]] == false){
+			topsort_util(mygraph, mygraph[u][i]);
 		}
 	}
 	mstack.push(u);
@@ -22,7 +22,7 @@ void top_sort(vector <int> mygraph[], int v){
 	//stack <int> mstack;	
 	for(int i=0;i<v;i++){
 		if(visited[i] == false){
-			topsort_util(mygraph, i+1);
+			topsort_util(mygraph, i);
 		}
 	}
 	while(!mstack.empty()){
@@ -45,7 +45,7 @@ int main(){
 	}
 	cout<<"Adjacency List: \n";
 	for(int i=0;i<v;i++){
-		cout<<i+1<<"-> ";
+		cout<<i<<"-> ";
 		for(int j=0;j<graph[i].size();j++)
 			cout<<graph[i][j]<<" ";
 		cout<<endl;		
