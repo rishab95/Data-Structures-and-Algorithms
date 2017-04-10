@@ -1,64 +1,91 @@
-#include <bits/stdc++.h>
 #include <iostream>
 #include <vector>
-#include <stack>
-//#include <unordered_map>
+#include <cstring>
 using namespace std;
 int V;
 
-bool is_Safe(vector <int> adj[], int u, int path[], int c)
+/* A utility function to check if the vertex v can be added at
+   index 'pos' in the Hamiltonian Cycle constructed so far (stored
+   in 'path[]') */
+bool isSafe(vector<int> adj[],int v,int path[],int pos)
 {
-	for(int i=0;i< adj[u].size();i++){
-		if(path[adj[u][i]] == c){
-			return false;
-		}
+	 /* Check if this vertex is an adjacent vertex of the previously
+       added vertex. */
+	int u = path[pos-1],i;
+	for(i=0;i<adj[u].size();i++)
+	{
+		if(adj[u][i]==v)
+			break;
 	}
+	if(i==adj[u].size())
+		return false;
+	/* Check if the vertex has already been included.
+      This step can be optimized by creating an array of size V */
+	for(int i=0;i<pos;i++)
+		if(path[i]==v)
+			return false;
 	return true;
 }
-
-bool ham_cycle_visit(vector <int> adj[], int path[], int u)
+/* A recursive utility function to solve hamiltonian cycle problem */
+bool hamCycleUtil(vector<int> adj[],int path[],int pos)
 {
-	//base case - if all vertices are covered
-	if(u == V){
-		return true;
-	}
-	for(int i=1;i<=V;i++)
+	/* base case: If all vertices are included in Hamiltonian Cycle */
+	if(pos==V)
 	{
-		if(is_Safe(adj, i, path, u))
-		{
-			path[u] = i;
-			//recursively construct the path
-			if(ham_cycle_visit(adj,path,u+1))
-				return true;
-
-			//if adding v doesn't get u a solution, remove it;
-			path[u] = -1;
-		}
+		// And if there is an edge from the last included vertex to the
+        // first vertex (check if cucle is completed)
+        int u = path[pos-1]; //last included vertex
+        int v = path[0]; //first vertex
+        int i;
+        for(i=0;i<adj[u].size();i++)
+        {
+        	if(adj[u][i]==v)
+        		return true;
+        }
+        if(i==V)
+        	return false;
 	}
-	return false;
+	// Try different vertices as a next candidate in Hamiltonian Cycle.
+    // We don't try for 0 as we included 0 as starting point in in hamCycle()
+    for(int v=1;v<V;v++)
+    {
+    	if(isSafe(adj,v,path,pos))
+    	{
+    		path[pos]=v;
+    		/* recur to construct rest of the path */
+    		if(hamCycleUtil(adj,path,pos+1)==true)
+    			return true;
+    		/* If adding vertex v doesn't lead to a solution,
+               then remove it */
+    		path[pos]=-1;
+    	}
+    }
+    /* If no vertex can be added to Hamiltonian Cycle constructed so far,
+       then return false */
+    return false;
 }
 
-void ham_cycle(vector <int> adj[])
+bool hamCycle(vector<int> adj[])
 {
 	int path[V];
-	memset(path,0,V);
-	if(ham_cycle_visit(adj,path,0) == false)
+	memset(path,-1,V);
+	path[0]=0;
+	if(hamCycleUtil(adj,path,1)==false)
 	{
-		cout<<"No Solution\n";
-	//	return false;
+		cout<<"No solution\n";
+		return false;
 	}
-	//Else print the path;
+	//print
 	for(int i=0;i<V;i++)
-	{
 		cout<<path[i]<<" ";
-	}
-	cout<<path[0]<<"\n";
-	//return true;
+	cout<<path[0];
+	cout<<endl;
+	return true;
 }
 
 int main()
 {
-		int e,m;
+	int e;
 	cout<<"Enter number of vertices and edges\n";
 	cin>>V>>e;
 	vector<int> a[V];
@@ -70,9 +97,6 @@ int main()
 		a[x].push_back(y);
 		a[y].push_back(x);
 	}
-	cout<<"enter max colors\n";
-	//cin>>m;
-	ham_cycle(a);
+	hamCycle(a);
 	cout<<endl;
 }
-

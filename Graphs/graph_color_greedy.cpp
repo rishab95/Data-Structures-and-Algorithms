@@ -14,7 +14,7 @@ void graph_color(vector <int> adj[], int V){
 
 	int color[V]; // to store colors
 	for(int i=0;i<V;i++)
-		color[i] = -1;
+		color[i] = 0;
 
 	color[0] = 0; // assign ist color to 1st vertex
 
@@ -34,7 +34,7 @@ void graph_color(vector <int> adj[], int V){
 		}
 		//find 1st unavail color
 		int cr;
-		for(cr = 0;cr<V;cr++)
+		for(cr=0;cr<V;cr++)
 		{
 			if(unavail[cr] == false)
 				break;
