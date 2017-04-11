@@ -44,6 +44,7 @@ bool hamCycleUtil(vector<int> adj[],int path[],int pos)
         }
         if(i==V)
         	return false;
+
 	}
 	// Try different vertices as a next candidate in Hamiltonian Cycle.
     // We don't try for 0 as we included 0 as starting point in in hamCycle()
@@ -53,7 +54,7 @@ bool hamCycleUtil(vector<int> adj[],int path[],int pos)
     	{
     		path[pos]=v;
     		/* recur to construct rest of the path */
-    		if(hamCycleUtil(adj,path,pos+1)==true)
+    		if(hamCycleUtil(adj,path,pos+1))
     			return true;
     		/* If adding vertex v doesn't lead to a solution,
                then remove it */
