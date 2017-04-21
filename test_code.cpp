@@ -9,7 +9,11 @@ using namespace std;
 
 int main(int argc, char const *argv[])
 {
-	vector<vector <int> > subs(1, vector<int>());
+	string str1 = "Hello";
+	string str2 = "Hello";	
+	int result = str1.compare(str2);
+	cout<<result<<endl;
+	/*vector<vector <int> > subs(1, vector<int>());
 	int a = subs.size();
 	cout<<a<<endl;
 	
