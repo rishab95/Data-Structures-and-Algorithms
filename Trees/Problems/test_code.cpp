@@ -59,11 +59,11 @@ int main()
 	vector<vector<int> > v;
 	v = printverticalorder(root);
 	int m = v.size();
-	for(int i=0;i<m;i++)
+	for(int i=0;i<m;++)
 	{
 		for(int j=0;j<v[0].size();i++)
 		{
-			cout<<"Value: "<<v[i][j]<<" ";
+			cout<<"Value: "<<v[i][j<<" ";
 		}
 	}
 	return 0;
