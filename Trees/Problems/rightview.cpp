@@ -25,8 +25,10 @@ void rightviewaux(node* root, int level, int *maxlevel)
 		return;
 
 	if(*maxlevel < level)
+	{
+		*maxlevel = level;
 		cout<<root->val<<" ";
-	*maxlevel = level;
+	}
 
 	rightviewaux(root->right, level+1 , maxlevel);
 	rightviewaux(root->left, level+1, maxlevel);

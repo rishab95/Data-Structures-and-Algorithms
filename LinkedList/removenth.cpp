@@ -50,24 +50,20 @@ class list{
 
 node* partition(node* head, int x)
 {
-	node* tail = head;
-	node* curr = head;
-	while(curr != NULL)
+	node *s = head, *f = head;
+	while(x)
 	{
-		node* nxt = curr->next;
-		if((curr->value)%2 == 0)
-		{
-			curr->next = head;
-			head = curr;
-		}
-		else
-		{
-			tail->next = curr;
-			tail = curr;
-		}
-		curr = nxt;
+		f = f->next;
+		x--;
 	}
-	tail->next = NULL;
+	f=f->next;
+
+	while(f != NULL)
+	{
+		f = f->next;
+		s = s->next;
+	}
+	s->next = s->next->next;
 	return head;
 }
 
@@ -75,16 +71,16 @@ int main()
 {
 	list l1, l2;
 	l1.addnode(30);
-	l1.addnode(12);
+	l1.addnode(1);
 	l1.addnode(0);
-	l1.addnode(3);
-	l1.addnode(11);
-	l1.addnode(21);
-	l1.addnode(9);
-	l1.addnode(90);
+	l1.addnode(2);
+	l1.addnode(10);
+	l1.addnode(22);
+	l1.addnode(12);
 	l1.print_list();
 	int x = 3;
 	l2.head = partition(l1.head, x);
+	
 	l2.print_list();
 	
 	return 0;
