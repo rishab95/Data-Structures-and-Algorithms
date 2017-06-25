@@ -31,8 +31,7 @@ int checkslope(node *head)
 	while(curr && curr->next)
 	{
 		node* nxt = curr->next;
-		node* nxt2 = curr->next->next;		
-
+		
 		double s = (nxt->y - curr->y)/(nxt->x - curr->x);
 
 		if(s != m)
