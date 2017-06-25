@@ -22,6 +22,8 @@ struct node
     }
 };
 
+//Do level order traversal in diagoal form;
+
 void diagonal_view(node* root)
 {
 	queue<node*> q;
@@ -59,12 +61,15 @@ void diagonal_view(node* root)
 
 int main()
 {
-	node* root = new node(10);
+	node* root = new node(3);
 	root->left = new node(5);
-	root->left->left = new node(2);
-	root->left->right = new node(20);
-	root->right = new node(18);
-	root->right->right = new node(8);	
+	root->left->right = new node(4);
+	root->left->left = new node(1);
+	root->left->left->right = new node(9);
+	root->right = new node(2);
+	root->right->right = new node(7);	
+	root->right->left = new node(6);	
+	root->right->right->left = new node(8);	
 	diagonal_view(root);
 	return 0;	
 }
