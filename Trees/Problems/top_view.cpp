@@ -70,53 +70,6 @@ void bottom_view(node* root)
 }
 
 
-void diagonalPrint(node* root)
-{
-	// create an empty queue
-	queue<node*> q;
-
-	// create a sentinel (dummy) node to denote end of a diagonal
-	node* sentinel = new node(-1);
-
-	// enqueue all nodes of first diagonal in binary tree
-	while (root)
-	{
-		q.push(root);
-		root = root->right;
-	}
-
-	// enqueue sentinel node at the end of each diagonal
-	q.push(sentinel);
-
-	// run till only sentinel is left
-	while (q.size() != 1)
-	{
-		// dequeue front node
-		node* front = q.front();
-		q.pop();
-
-		if (front != sentinel)
-		{
-			// print current node
-			cout << front->val << " ";
-
-			// enqueue nodes of next diagonal in binary tree
-			node* Node = front->left;
-			while (Node)
-			{
-				q.push(Node);
-				Node = Node->right;
-			}
-		}
-		else
-		{
-			// if end of current diagonal is reached, enqueue sentinel node
-			// and print newline
-			q.push(sentinel);
-			cout << endl;
-		}
-	}
-}
 
 
 int main()

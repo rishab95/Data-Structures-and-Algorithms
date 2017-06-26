@@ -21,6 +21,7 @@ struct node
         left = right = NULL;
     }
 };
+
 void correct(node* root, node** f, node** m, node** e, node** p)
 {
 	if(root)
@@ -51,14 +52,14 @@ vector<int>  recoverbst(node* root)
 	{
 		res.push_back(f->val);
 		res.push_back(e->val);
-		cout<<f->val<<" "<<e->val;
+		//cout<<f->val<<" "<<e->val;
 		swap((f->val), (e->val));
 	}
 	else if(f && m)
 	{
 		res.push_back(f->val);
 		res.push_back(m->val);
-		cout<<f->val<<" "<<m->val;
+		//cout<<f->val<<" "<<m->val;
 		swap((f->val), (m->val));
 	}
 	return res;
