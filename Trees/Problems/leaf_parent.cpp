@@ -42,8 +42,6 @@ int printleafparent(node* root)
 }
 
 
-
-
 int main()
 {
 	node* root = new node(10);
