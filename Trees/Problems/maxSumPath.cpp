@@ -19,10 +19,27 @@ struct node
 	}
 };
 
+int sumAux(node* root, int &ans)
+{
+	if(root ==  NULL)
+		return 0;
+	int left = sumAux(root->left, ans);
+	int right = sumAux(root->right, ans);
+
+	int max_temp = max(max(left,right) + root->val, root->val);
+
+	int all_max = max(max_temp, left + right + root->val);  // sum when no ancestors there present in sum path.
+
+	ans = max(ans, all_max); // Will store max result
+
+	return max_temp;
+}
+
 int maxSum(node* root)
 {
 	int ans = INT_MIN;
-	
+	sumAux(root, ans);
+	return ans;
 }
 
 int main()
@@ -33,6 +50,7 @@ int main()
 	root->left->right = new node(20);
 	root->right = new node(18);
 	root->right->left = new node(8);
-	rightview(root);
+	//root->right->left->right = new node(38);
+	cout<<maxSum(root)<<" ";
 	return 0;
 }

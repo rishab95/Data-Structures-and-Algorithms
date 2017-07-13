@@ -5,21 +5,25 @@
 using namespace std;
 
 
-int cut_rod(vector<int> price)
+void cut_rod(vector<int> price)
 {
 	int length = price.size();
+	int n = length;
 	int value[length+1];
 	value[0]=0;
 	for(int i=1;i<=length;i++)
-	{
+		value[i] = INT_MAX;	
+	int ans[n+1 ] , j;
+	ans[0] = 0;
+	for(int i=1;i<=length;i++)
+	{		
 		int max_val = INT_MIN;	
-		for(int j=0;j<i;j++)
+		for(j=0;j<i;j++)
 		{
-			max_val = max(max_val, price[j] + value[i-j-1]);
-		}
-		value[i] = max_val;
+			max_val = max(max_val, price[j] + value[i-j-1]);						
+		}	
 	}
-	return value[length];
+	cout<<max_val;
 }
 
 int main(int argc, char const *argv[])
@@ -33,7 +37,7 @@ int main(int argc, char const *argv[])
 	price.push_back(17);
 	price.push_back(27);
 	price.push_back(20);	
-	int ans = cut_rod(price);
-	cout<<"Ans: "<<ans<<"\n";
+	cut_rod(price);
+	//cout<<"Ans: "<<ans<<"\n";
 	return 0;
 }
