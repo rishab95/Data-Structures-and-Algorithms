@@ -52,19 +52,17 @@ node* rotate(node* head, int k)
 {
 	if(head == NULL || k == 0)
 		return head;
-	node* curr = head;
-	node* split = NULL;
 
-	while(curr->next != NULL)
+	node* iter = head;
+	node* split = NULL;
+	while(iter->next != NULL)
 	{
-		if(--k == 0)			
-			split = curr;
-		curr = curr->next;
-	}
-	curr->next = head;
-	head = split->next;
-	split->next = NULL;
-	return head;
+		if(--k == 0)
+		{
+			split = iter;			
+		}
+		iter = iter->next;
+	}	
 }
 
 int main()

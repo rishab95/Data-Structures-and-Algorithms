@@ -20,16 +20,20 @@ struct node
 	}
 };
 
+node* mirror(node* root)
+{
+    if(root == NULL)
+        return NULL;
+    root->left = mirror(root->left);
+    root->right = mirror(root->right);
 
-/**
- * Definition for binary tree
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
- * };
- */
+    node* t = root->left;
+    root->left = root->right;
+    root->right = t;   
+
+    return root;
+}
+
 vector<vector<int> > levelOrder(node* A) {
    queue<node* > q;
    q.push(A);
@@ -70,7 +74,18 @@ int main()
 	root->left->right = new node(20);
 	root->right = new node(18);
 	root->right->left = new node(8);
-	vector<vector<int> > ans = levelOrder(root);
+	vector<vector<int> > res = levelOrder(root);
+	for(int i=0;i<res.size();i++)
+	{
+		for(int j = 0;j<res[i].size();j++)
+		{
+			cout<<res[i][j]<<" ";
+		}
+		cout<<endl;
+	}
+	cout<<endl;
+	node* r = mirror(root);
+	vector<vector<int> > ans = levelOrder(r);
 	for(int i=0;i<ans.size();i++)
 	{
 		for(int j = 0;j<ans[i].size();j++)
@@ -79,5 +94,6 @@ int main()
 		}
 		cout<<endl;
 	}
+
 	return 0;
 }

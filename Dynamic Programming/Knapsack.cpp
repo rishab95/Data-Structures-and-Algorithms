@@ -13,13 +13,16 @@ long long int knapsack(vector<int> a, int n, int m){
     for(int i=1;i<=n;i++){
         t[i][0]=0;
     }
-    for(int i=1;i<=n;i++){
-        for(int j=1;j<=m;j++){
-            if(j>=a[i-1]){
-            t[i][j]=max(a[i-1]+t[i][j-a[i-1]],t[i-1][j]);
-
+    for(int i=1;i<=n;i++)
+    {
+        for(int j=1;j<=m;j++)
+        {
+            if(j>=a[i-1])
+            {
+                t[i][j]=max(a[i-1]+t[i][j-a[i-1]],t[i-1][j]);
             }
-            else{
+            else
+            {
                 t[i][j]=t[i-1][j];
             }
         }

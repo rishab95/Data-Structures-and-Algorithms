@@ -8,7 +8,7 @@ int min_change(vector <int> coins, int target)
 {
 	int n = coins.size();
 	int table[target + 1];
-	table[0]=0;
+	table[0] = 0;
 	for(int i=1; i <= target; i++)
 	{
 		table[i] = INT_MAX;
@@ -20,7 +20,7 @@ int min_change(vector <int> coins, int target)
 			if(coins[j] <= i)
 			{
 				int temp = table[i - coins[j]];
-				if(temp != INT_MAX && temp+1 < table[i])
+				if(temp != INT_MAX && temp + 1 < table[i])
 				{
 					table[i] = temp + 1;
 				}

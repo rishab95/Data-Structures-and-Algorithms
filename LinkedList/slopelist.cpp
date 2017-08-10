@@ -27,13 +27,13 @@ int checkslope(node *head)
 	//slope = (y2-y1)/(x2-x1);
 
 	double m = (curr->next->y - curr->y) / (curr->next->x - curr->x);
+	//cout<<
 	//curr = curr->next;
 	while(curr && curr->next)
 	{
 		node* nxt = curr->next;
 		
-		double s = (nxt->y - curr->y)/(nxt->x - curr->x);
-
+		double s = (nxt->y - curr->y)/(nxt->x - curr->x);		
 		if(s != m)
 		{
 			count++;
@@ -57,11 +57,11 @@ void print(node* head)
 
 int main()
 {
-	node* head = new node(1, 2);
-	head->next = new node(2, 4);
+	node* head = new node(1, 5);
+	head->next = new node(2, 5);
 	head->next->next = new node(3, 5);
-	head->next->next->next = new node(5, 6);
-	head->next->next->next->next = new node(7, 7);
+	head->next->next->next = new node(5, 10);
+	head->next->next->next->next = new node(7, 10);
 	print(head);
 	int res = checkslope(head);
 	cout<<res<<endl;

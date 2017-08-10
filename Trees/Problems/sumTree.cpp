@@ -20,16 +20,23 @@ struct node
 	}
 };
 
+int sumTree(node* root)
+{
+	if(root == NULL)
+		return 0;
 
-/**
- * Definition for binary tree
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
- * };
- */
+	//store prev value of node for use after recursive call
+	int temp  =  root->val;
+
+	//recursively call function to calculate vals for left and right subtree;
+	root->val = sumTree(root->left) + sumTree(root->right);
+
+	//return updated val along with old val stored in temp;
+
+	return (temp + root->val);
+}
+
+
 vector<vector<int> > levelOrder(node* A) {
    queue<node* > q;
    q.push(A);
@@ -61,6 +68,27 @@ vector<vector<int> > levelOrder(node* A) {
    return res;
 }
 
+int Sum(node* root)
+{
+	if(root == NULL)
+		return 0;
+	return Sum(root->left) + root->val +  Sum(root->right);
+}
+
+int checkSumTree(node* root)
+{
+	if(root == NULL || root->left == NULL && root->right == NULL)
+		return 1;
+
+	int ls, rs;
+	ls = Sum(root->left);
+	rs = Sum(root->right);
+
+	if((ls + rs == root->val) && checkSumTree(root->left) && checkSumTree(root->right))
+		return 1;
+
+	return 0;
+}
 
 int main()
 {
@@ -70,6 +98,17 @@ int main()
 	root->left->right = new node(20);
 	root->right = new node(18);
 	root->right->left = new node(8);
+	vector<vector<int> > res = levelOrder(root);
+	for(int i=0;i<res.size();i++)
+	{
+		for(int j = 0;j<res[i].size();j++)
+		{
+			cout<<res[i][j]<<" ";
+		}
+		cout<<endl;
+	}
+	cout<<endl<<"New Tree: "<<endl;
+	sumTree(root);
 	vector<vector<int> > ans = levelOrder(root);
 	for(int i=0;i<ans.size();i++)
 	{
@@ -79,5 +118,9 @@ int main()
 		}
 		cout<<endl;
 	}
+	cout<<endl;
+	cout<<checkSumTree(root);
+
+
 	return 0;
 }

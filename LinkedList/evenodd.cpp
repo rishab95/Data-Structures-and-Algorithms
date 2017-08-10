@@ -55,7 +55,7 @@ node* partition(node* head, int x)
 	while(curr != NULL)
 	{
 		node* nxt = curr->next;
-		if((curr->value)%2 == 0)
+		if((curr->value) <= x)
 		{
 			curr->next = head;
 			head = curr;
@@ -71,6 +71,19 @@ node* partition(node* head, int x)
 	return head;
 }
 
+node* evenodd(node* head)
+{
+	node* iter = head;
+	node* tail = head;
+	node* prev = NULL;
+
+	node* new_tail;
+	//When all odd b4 even take them to end;
+	//while((iter->value)%2==0 && iter!=NULL){
+
+	//}
+}
+
 int main()
 {
 	list l1, l2;
@@ -84,7 +97,7 @@ int main()
 	l1.addnode(90);
 	l1.print_list();
 	int x = 3;
-	l2.head = partition(l1.head, x);
+	l2.head = partition(l1.head, 18);
 	l2.print_list();
 	
 	return 0;
