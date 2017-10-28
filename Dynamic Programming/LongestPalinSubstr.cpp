@@ -1,34 +1,50 @@
 #include <iostream>
-#include <vector>
 #include <algorithm>
 
 using namespace std;
 
-int lpSub(string s)
+int longest_palin_substr(string s)
 {
-	int m = s.length();
-	int dp[m+1][m+1];
-	int result = 0;
-	for(int i=0;i<=m ;i++){
-		for(int j=0;j<=m;j++){
-			if(i==0 || j==0)
-				dp[i][j] = 0;
-			else if(s[i-1] == s[m-j-1])
+ 	int n = s.length();
+ 	bool palin[n+1][n+1];
+ 	int max_len = 1;
+ 	int palin_begin = 0;
+ 	
+ 	for(int i=0;i<=n;i++)
+	{
+		palin[i][i] = true;		
+	}
+ 	
+ 	for(int i=0;i<n-1;i++)
+ 	{
+ 		if(s[i] == s[i+1])
+ 		{
+ 			palin[i][i+1] = true;
+ 			palin_begin = i;
+ 			max_len = 2;
+ 		}
+ 	}
+ 	
+	for(int curr = 3;curr <= n; curr++)
+	{
+		for(int i = 0;i < n - curr + 1;i++)
+		{
+			int j = i + curr  - 1;
+			if(s[i] == s[j] && palin[i+1][j-1])
 			{
-				dp[i][j] = 1 + dp[i-1][j-1];
-				result = max(result, dp[i][j]);
+				palin[i][j] = true;
+				palin_begin = i;
+				max_len = curr;
 			}
-			else
-				dp[i][j] = 0;
 		}
-	}	
-	return result;
+	}
+ 	return max_len;
 }
 
-int main(int argc, char const *argv[])
+int main()
 {
-	/* code */
-	string T = "BXACBCABBA";
-	cout<<"Length is: "<<lpSub(T)<<endl;
+	string s;
+	s = "BANANANANANANANAS";
+	cout<<"Length is : "<<longest_palin_substr(s)<<endl;
 	return 0;
 }

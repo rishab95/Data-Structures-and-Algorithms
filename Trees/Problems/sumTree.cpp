@@ -20,23 +20,6 @@ struct node
 	}
 };
 
-int sumTree(node* root)
-{
-	if(root == NULL)
-		return 0;
-
-	//store prev value of node for use after recursive call
-	int temp  =  root->val;
-
-	//recursively call function to calculate vals for left and right subtree;
-	root->val = sumTree(root->left) + sumTree(root->right);
-
-	//return updated val along with old val stored in temp;
-
-	return (temp + root->val);
-}
-
-
 vector<vector<int> > levelOrder(node* A) {
    queue<node* > q;
    q.push(A);
@@ -66,6 +49,18 @@ vector<vector<int> > levelOrder(node* A) {
        }
    }
    return res;
+}
+
+int sum_tree(node* root)
+{
+	if(root == NULL)
+	{
+		return 0;
+	}
+	int old = root->val;
+	root->val = sum_tree(root->left) + sum_tree(root->right);
+
+	return root->val + old;
 }
 
 int Sum(node* root)
@@ -108,7 +103,7 @@ int main()
 		cout<<endl;
 	}
 	cout<<endl<<"New Tree: "<<endl;
-	sumTree(root);
+	sum_tree(root);
 	vector<vector<int> > ans = levelOrder(root);
 	for(int i=0;i<ans.size();i++)
 	{

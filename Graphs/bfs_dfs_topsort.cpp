@@ -15,7 +15,7 @@ class Graph{
 		vector<bool> visit;		
 		void recdfsaux(int);
 		void dfsaux(int);
-		void topsortaux(int , stack<int>& );
+		void topsortaux(int , stack<int>&);
 	public:
 		Graph(int v)
 		{
@@ -90,9 +90,7 @@ void Graph::bfs(int s)
 void Graph::dfsaux(int u)
 {
 	stack<int> s;
-	s.push(u);
-	//visit[u] = true;
-	//cout<<u<<" ";
+	s.push(u);	
 	while(!s.empty())
 	{
 		int v = s.top();

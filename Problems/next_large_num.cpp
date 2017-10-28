@@ -1,55 +1,43 @@
-#include <iostream>
-#include <algorithm>
-#include <vector>
-#include <cstring>
-
+#include<iostream>
+#include<algorithm>
+#include<cstring>
 using namespace std;
 
 void swap(char *a, char *b)
 {
-    char temp = *a;
-    *a = *b;
-    *b = temp;
+	char t = *a;
+	*a = *b;
+	*b = t;
 }
 
-void nextlargest(char s[], int n)
+void next(char num[], int n)
 {
-	//int n = s.length();
 	int i, j;
-	for(i=n-1;i>0;i--)
-	{
-		if(s[i] > s[i-1])
-			break;
+	for(i=n-1;i>0;i--){
+		if(num[i] > num[i-1]){
+  			break;
+  		}
 	}
-	if(i == 0)
+	if(i==0)
 	{
-		cout<<"No\n";
-		return;
+		cout<<"No";
 	}
-
-	// here i = 3, i-1 = 2;
-	//temp = 4, small = 3;
-	int temp = s[i-1] , small = i;
-
-	for(j=i+1; j<n; j++)
+	
+	int p = num[i-1], small = i;
+	for(j=i+1;j<n;j++)
 	{
-		if(s[j] > temp && s[j] < s[small])
-		{
+		if(num[j] > p && num[j] < num[small]){
 			small = j;
 		}
 	}
-	swap(&s[small], &s[i-1]);
-	sort(s + i, s + n);
-
-	cout<<"Next is "<<s;
-	return;
+	swap(&num[small], &num[i-1]);
+	sort(num+i, num+n);
+	cout<<num<<endl;
 }
 
-int main(int argc, char const *argv[])
+int main()
 {
-	/* code */
-	char s[] = "534976";
-	int n = strlen(s);
-	nextlargest(s, n);
-	return 0;
+	char no[] = "4254";
+	int n = strlen(no);
+	next(no, n);
 }

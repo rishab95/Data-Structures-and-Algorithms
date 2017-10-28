@@ -26,6 +26,11 @@ int minJumps(vector<int> arr, int result[])
             }
         }
     }
+    for(int i=0;i<n;i++)
+    {
+    	cout<<jumps[i]<<" ";
+    }
+    cout<<endl;
     return jumps[n-1];
 }
 

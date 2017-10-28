@@ -1,32 +1,44 @@
-#include <iostream>
-#include <algorithm>
-#include <vector>
-
+#include <bits/stdc++.h>
+#include <unordered_map>
 using namespace std;
 
-int main(int argc, char const *argv[]){
-	int t;
-	cin>>t;
-	while(t--){
-		long long int a, b, count=0,flag=0;
-		cin>>a>>b;
-		if(b>a){
-			a=a+b;
-			b=a-b;
-			a=a-b;		
-		}
-		while(a>0 || b>0){
-			int carry = (a%10) + (b%10) + flag;
-			a=a/10, b=b/10;
-			if(carry/10 > 0){
-				count++;
-				flag=1;
-			}else{
-				flag=0;
-			}			
-		}
-		cout<<count<<"\n";
+int count_triplets(vector <int> &arr, int p)
+{
+	int n = arr.size();
+	unordered_map <int, int> m;
+	int count = 0;
+	for(int i=0;i<n;i++)
+	{
+		m[arr[i]] = i;
 	}
-	return 0;
+
+	for(int i=0;i<n-1;i++)
+	{
+		for(int j=i+1;j<n;j++)
+		{
+			if((arr[i]*arr[j] < p) && (arr[i]*arr[j] != 0) && (p%(arr[i]*arr[j]) == 0)){
+				int var = p / (arr[i]*arr[j]);				
+				//if(m.find(var) != m.end())
+				auto it = m.find(var);
+				if(var != arr[i] && var != arr[j] && it != m.end() && it->second > i && it->second > j){
+					count++;
+				}					
+			}
+		}
+	}
+	return count;	
 }
-	
+
+int main()
+{
+	vector<int>arr;
+	arr.push_back(1);
+	arr.push_back(4);
+	arr.push_back(6);
+	arr.push_back(2);
+	arr.push_back(3);
+	arr.push_back(8);
+	int p = 24;
+	cout<<count_triplets(arr, p);
+	return 0;
+}	

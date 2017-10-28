@@ -22,13 +22,12 @@ int main()
 				a[j] = a[j+1];
 				a[j+1] = tmp;
 			}
-		}/* code */
+		}
 	}
 	cout<<"array";
 	for (int i = 0; i < n; ++i)
 	{
 		cout<<a[i]<<endl;
-	}
-	/* code */
+	}	
 	return 0;
 }

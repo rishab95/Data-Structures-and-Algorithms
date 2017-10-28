@@ -28,7 +28,7 @@ void merge(int *ar, int l, int m, int r)
 			*(ar+k) = right[j];
 			j++;
 		}
-	k++;
+    	k++;
 	}
 
 	//Remainibg elements of left
@@ -70,5 +70,5 @@ int main()
 		cout<<arr[i]<<" ";
 	}
 	/* code */
-return 0;
+    return 0;
 }

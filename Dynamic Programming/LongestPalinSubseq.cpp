@@ -15,15 +15,15 @@ int lps(string s)
 				dp[i][j] = 0;
 			else if(s[i-1] == s[m-j-1])
 			{
-				dp[i][j] = 1 + dp[i-1][j];
-				res = max(res, dp[i][j]);
+				dp[i][j] = 1 + dp[i-1][j-1];
+				//res = max(res, dp[i][j]);
 			}
 			else
-				dp[i][j] = 0;
+				dp[i][j] = max(dp[i-1][j], dp[i][j-1]);
 		}
 	}	
-	//return dp[m][m];
-	return res;
+	return dp[m][m];
+	//return res;
 }
 
 int main(int argc, char const *argv[])

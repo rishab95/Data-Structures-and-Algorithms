@@ -6,6 +6,7 @@ int partition(int a[], int p, int r)
 	int i, temp, x, j;
 	i = p-1;
 	x = a[r];
+	cout<<x<<endl;
 	for(j=p;j<=r-1;j++)
 	{
 		if(a[j]<=x)
@@ -16,6 +17,11 @@ int partition(int a[], int p, int r)
 			a[j] = temp;
 		}
 	}
+	for(int k=0;k<=r;k++)
+	{
+		cout<<a[k]<<" ";
+	}
+	cout<<endl;
 	temp = a[i+1];
 	a[i+1] = a[r];
 	a[r] = temp;

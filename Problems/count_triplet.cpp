@@ -1,10 +1,11 @@
 #include <bits/stdc++.h>
+#include <map>
 using namespace std;
 
 int count_triplets(vector <int> &arr, int p)
 {
 	int n = arr.size();
-	map<int, int> m;
+	unordered_map<int, int> m;
 	int count = 0;
 	for(int i=0;i<n;i++)
 	{
@@ -16,8 +17,9 @@ int count_triplets(vector <int> &arr, int p)
 		for(int j=i+1;j<n;j++)
 		{
 			if((arr[i]*arr[j] < p) && (arr[i]*arr[j] != 0) && (p%(arr[i]*arr[j]) == 0)){
-				int var = p / (arr[i]*arr[j]);
-				map<int, int> iterator:: it = m.find(var);
+				int var = p / (arr[i]*arr[j]);				
+				//if(m.find(var) != m.end())
+				auto it = m.find(var);
 				if(var != arr[i] && var != arr[j] && it != m.end() && it->second > i && it->second > j){
 					count++;
 				}					

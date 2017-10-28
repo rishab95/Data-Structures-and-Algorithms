@@ -82,7 +82,7 @@ int main()
 	l1.addnode(22);
 	l1.addnode(12);
 	l1.print_list();
-	int x = 3;
+	int x = 3; 
 	l2.head = partition(l1.head, x);
 	l2.print_list();
 	
